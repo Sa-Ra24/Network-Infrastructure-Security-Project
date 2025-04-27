@@ -39,9 +39,8 @@ It includes FortiGate firewall deployment, Active Directory Domain Services (AD 
 
 ## Project Structure
 - **/Backups:** Contains backup configuration files for routers, switches, and FortiGate devices.
-- **/Server_Setup:** (Optional) Contains exported DHCP and DNS settings, and sample AD structure.
-- **/Diagrams:** (Optional) Includes network topology and VPN design diagram.
-- **/Screenshots:** (Optional) Key screenshots of firewall HA, VPN tunnels, AD setup.
+- **/Diagrams:** Includes network topology and VPN design diagram.
+- **/Screenshots:** Key screenshots of AD setup.
 
 ## How to Use
 1. Load the provided device configuration backups into PNETLab.
