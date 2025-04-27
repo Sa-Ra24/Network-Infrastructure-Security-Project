@@ -1,0 +1,159 @@
+
+!
+! Last configuration change at 20:26:48 UTC Sat Mar 8 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname MLSW2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Port-channel1
+ no shutdown
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Ethernet0/0
+ no shutdown
+ switchport trunk allowed vlan 1,36,40,50,60,70
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Ethernet0/1
+ no shutdown
+ switchport trunk allowed vlan 1,36,40,50,60,70
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Ethernet0/2
+ no shutdown
+ switchport trunk allowed vlan 1,36,40,50,60,70
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Ethernet0/3
+ no shutdown
+ switchport trunk allowed vlan 1,36,40,50,60,70
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Ethernet1/0
+ no shutdown
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode passive
+!
+interface Ethernet1/1
+ no shutdown
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode passive
+!
+interface Ethernet1/2
+ no shutdown
+ switchport trunk allowed vlan 1,40,50,60,70
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Ethernet1/3
+ no shutdown
+!
+interface Vlan36
+ no shutdown
+ ip address 10.20.20.37 255.255.255.252
+ ip helper-address 10.200.200.100 
+!
+interface Vlan40
+ no shutdown
+ ip address 192.168.40.2 255.255.255.0
+ ip helper-address 10.200.200.100 
+ standby 40 ip 192.168.40.1
+!
+interface Vlan50
+ no shutdown
+ ip address 192.168.50.2 255.255.255.0
+ ip helper-address 10.200.200.100 
+ standby 50 ip 192.168.50.1
+!
+interface Vlan60
+ no shutdown
+ ip address 192.168.60.2 255.255.255.0
+ ip helper-address 10.200.200.100 
+ standby 60 ip 192.168.60.1
+!
+interface Vlan70
+ no shutdown
+ ip address 192.168.70.2 255.255.255.0
+ ip helper-address 10.200.200.100 
+ standby 70 ip 192.168.70.1
+!
+router ospf 1
+ router-id 2.2.2.2
+ network 10.20.20.36 0.0.0.3 area 0
+ network 192.168.40.0 0.0.0.255 area 0
+ network 192.168.50.0 0.0.0.255 area 0
+ network 192.168.60.0 0.0.0.255 area 0
+ network 192.168.70.0 0.0.0.255 area 0
+!
+ip forward-protocol nd
+!
+ip http server
+!
+ip route 0.0.0.0 0.0.0.0 10.20.20.38
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+!
+!
+!
+end
